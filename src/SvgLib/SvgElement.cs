@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Xml;
 
@@ -28,10 +30,10 @@ namespace SvgLib
 
         // TODO Add https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/Presentation
 
-        public string Fill
+        public Color Fill
         {
-            get => Element.GetAttribute("fill", SvgDefaults.Attributes.FillAndStroke.Fill);
-            set => Element.SetAttribute("fill", value);
+            get => HexToColor(Element.GetAttribute("fill", SvgDefaults.Attributes.FillAndStroke.Fill));
+            set => Element.SetAttribute("fill", ColorToHex(value));
         }
 
         public double FillOpacity
@@ -40,10 +42,10 @@ namespace SvgLib
             set => Element.SetAttribute("fill-opacity", value);
         }
 
-        public string Stroke
+        public Color Stroke
         {
-            get => Element.GetAttribute("stroke", SvgDefaults.Attributes.FillAndStroke.Stroke);
-            set => Element.SetAttribute("stroke", value);
+            get => HexToColor(Element.GetAttribute("stroke", SvgDefaults.Attributes.FillAndStroke.Stroke));
+            set => Element.SetAttribute("stroke", ColorToHex(value));
         }
 
         public double StrokeOpacity
@@ -146,5 +148,12 @@ namespace SvgLib
             var value = string.Join(";", styles.Select(kvp => $"{kvp.Key}: {kvp.Value}"));
             Element.SetAttribute("style", value);
         }
+
+        private static string ColorToHex(Color c) => "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
+        private static Color HexToColor(string hex)
+        {
+            int argb = int.Parse(hex.Replace("#", ""), NumberStyles.HexNumber);
+            return Color.FromArgb(argb);
+        }        
     }
 }

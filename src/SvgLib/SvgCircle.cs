@@ -1,4 +1,4 @@
-﻿using System.Xml;
+using System.Xml;
 
 namespace SvgLib
 {
@@ -14,6 +14,12 @@ namespace SvgLib
             var element = parent.OwnerDocument.CreateElement("circle");
             parent.AppendChild(element);
             return new SvgCircle(element);
+        }
+
+        public void SetCenter(double x, double y)
+        {
+            CX = x;
+            CY = y;
         }
 
         public double CX

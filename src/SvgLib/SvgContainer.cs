@@ -17,6 +17,8 @@ namespace SvgLib
 
         public SvgGroup AddGroup() => SvgGroup.Create(Element);
 
+        public SvgInkscapeLayer AddInkscapeLayer(string label) => SvgInkscapeLayer.Create(Element, label);
+
         public SvgImage AddImage() => SvgImage.Create(Element);
 
         public SvgLine AddLine() => SvgLine.Create(Element);

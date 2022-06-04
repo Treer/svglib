@@ -1,4 +1,5 @@
 using System.Xml;
+using Godot;
 
 namespace SvgLib
 {
@@ -20,6 +21,12 @@ namespace SvgLib
         {
             CX = x;
             CY = y;
+        }
+
+        public void SetCenter(Vector2 c)
+        {
+            CX = c.x;
+            CY = c.y;
         }
 
         public double CX

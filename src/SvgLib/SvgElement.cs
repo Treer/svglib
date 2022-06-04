@@ -149,9 +149,15 @@ namespace SvgLib
             Element.SetAttribute("style", value);
         }
 
-        private static string ColorToHex(Color c) => "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
+        private static string ColorToHex(Color c)
+        {
+            return c == Color.Empty ? "none" : "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
+        } 
         private static Color HexToColor(string hex)
         {
+            hex = hex?.Trim().ToLower() ?? string.Empty;
+            if (string.IsNullOrEmpty(hex) || hex == "none") { return Color.Empty; }
+
             int argb = int.Parse(hex.Replace("#", ""), NumberStyles.HexNumber);
             return Color.FromArgb(argb);
         }        

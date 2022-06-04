@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
+using Godot;
 
 namespace SvgLib
 {
@@ -19,7 +20,29 @@ namespace SvgLib
             return new SvgPolyLine(element);
         }
 
-        public double[] Points
+        public IEnumerable<Vector2> Points
+        {
+            get {
+                var stringArray = Element.GetAttribute("points");
+                var coordEnumerator = stringArray
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .AsEnumerable()
+                    .GetEnumerator();
+
+                while (coordEnumerator.MoveNext())
+                {
+                    float x = float.Parse(coordEnumerator.Current);
+                    if (!coordEnumerator.MoveNext()) { break; }
+                    yield return new Vector2(x, float.Parse(coordEnumerator.Current));
+                }
+            }
+            set {
+                var points = string.Join(", ", value.Select(v => $"{v.x.ToString("G", CultureInfo.InvariantCulture)},{v.y.ToString("G", CultureInfo.InvariantCulture)}"));
+                Element.SetAttribute("points", points);
+            }
+        }
+
+        public double[] Points_double
         {
             get
             {

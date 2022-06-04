@@ -1,9 +1,7 @@
 # SvgLib
 
-[![Build status](https://ci.appveyor.com/api/projects/status/rw89jost494vijpn/branch/master?svg=true)](https://ci.appveyor.com/project/huysentruitw/svglib/branch/master)
+A personal-use fork of [SvgLib](https://github.com/huysentruitw/svglib), adding:
+ * Inkscape Layers support
+ * some compatibility with Godot's Vector2 types
 
-Lightweight SVG library for .NET Framework, .NET Standard and .NET Core.
-
-## Get it on NuGet
-
-    PM> Install-Package SvgLib
+The purpose of this fork is just to provide a fast easy way to save SVG files to visualize/debug geometry being generated in a Godot C# project.

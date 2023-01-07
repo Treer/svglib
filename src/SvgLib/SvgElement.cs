@@ -9,7 +9,7 @@ namespace SvgLib
 {
     public abstract class SvgElement
     {
-        protected readonly XmlElement Element;
+        public readonly XmlElement Element;
 
         protected SvgElement(XmlElement element)
         {
